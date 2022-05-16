@@ -1,0 +1,734 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "kFy4rGQqSqT1"
+      },
+      "source": [
+        "# An Introductory Tour of Python for CS 3630"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zA02lrj_SqT5"
+      },
+      "source": [
+        "## Basic Python\n",
+        "\n",
+        "Welcome to CS 3630. We hope you're as excited for this class as we are excited to teach it.\n",
+        "\n",
+        "In this assignment, we introduce some basic tools and techniques which will hopefully be useful to you as you tackle all the labs this semester, as well as ensure that you're development environment is set up correctly.\n",
+        "\n",
+        "Some of you may already be familiar with all the topics in this assignment, so think of this assignment as more of a \"working out the initial gremlins\"."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "ZpfRRdCPSqT5"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np\n",
+        "import gtsam"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CgvVZ0taSqT6"
+      },
+      "source": [
+        "### Printing\n",
+        "\n",
+        "The most fundamental aspect of any programming language is being able to print out values, which is incredibly easy in Python.\n",
+        "\n",
+        "Being able to print with nice formatting is particularly helpful in debugging."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "UOBvpp_VSqT6",
+        "outputId": "a4e1e7a5-ee00-48f8-99df-09870ba2a068",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Welcome to CS 3630\n",
+            "This is for Summer 2022\n"
+          ]
+        }
+      ],
+      "source": [
+        "print(\"Welcome to CS 3630\")\n",
+        "\n",
+        "term = \"Summer\"\n",
+        "year = 2022\n",
+        "print(\"This is for {0} {1}\".format(term, year))"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "WRYvQ8RjSqT7"
+      },
+      "source": [
+        "One powerful way to print lots of variables conveniently is to use `f-strings`. `f-strings` stand for format-strings which leverage special syntax for formatting. You specify an `f-string` by prepending the string with an `f` and printing variables in it by specifying the variable name with curly braces, e.g. `{var}`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "m98HXturSqT7"
+      },
+      "outputs": [],
+      "source": [
+        "name = #TODO Add your name here.\n",
+        "fstring =f\"This is a f-string to display your name: {name}\"\n",
+        "print(fstring)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "OnJljaWrSqT7"
+      },
+      "source": [
+        "Here's on cool trick that not many of you may know: you can have python print both the variable name and its value, helping you to associate the correct variables and values.\n",
+        "\n",
+        "For example, if you have a variable called `gravity`, it is much more illustrative to print `gravity=9.81` rather than simply `9.81` which could also be some other value in your code. The way it is done is to add a `=` symbol after the variable name in an `f-string`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "W2lf70AASqT8"
+      },
+      "outputs": [],
+      "source": [
+        "gravity = 9.81\n",
+        "\n",
+        "print(f\"{gravity=}\")"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "s9x5YqjRSqT9"
+      },
+      "source": [
+        "### Looping\n",
+        "\n",
+        "A lot of operations involve for-loops, which in python is very idiomatic."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "QguVC48DSqT9"
+      },
+      "outputs": [],
+      "source": [
+        "x = [1, 3, 5, 7]\n",
+        "\n",
+        "vanilla_sum = 0\n",
+        "for i in range(len(x)):\n",
+        "    vanilla_sum += x[i]\n",
+        "\n",
+        "print(vanilla_sum)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "YIqSZTaxSqT9"
+      },
+      "source": [
+        "However, you may want to use the `enumerate` built-in method for most of your loops as it lets you iterate through elements while also providing an index into them.\n",
+        "\n",
+        "Why don't you try adding the line of code to do that? It should be very similar to the above loop statement."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "cAgLnVU3SqT-"
+      },
+      "outputs": [],
+      "source": [
+        "sum = 0\n",
+        "for i, d in enumerate(x):\n",
+        "    #TODO Add code to sum the values in x here\n",
+        "\n",
+        "assert sum == vanilla_sum\n",
+        "print(sum)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XmizRd_dSqT-"
+      },
+      "source": [
+        "Things like `if-else` statememts, classes, and functions are pretty much the same as any other programming language you've used in the past, so we won't spend too much time on those."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XSvvP1efSqT-"
+      },
+      "source": [
+        "### Comprehensions & Lambdas\n",
+        "\n",
+        "List comprehensions are a powerful tool to make your code more succinct and easier to read.\n",
+        "\n",
+        "Say you want to filter out all the even numbers from a list into a new list, this is easily done with a list comprehension."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "OrugGIdiSqT-"
+      },
+      "outputs": [],
+      "source": [
+        "x = list(range(20))\n",
+        "\n",
+        "evens = [c for c in x if c % 2 == 0]\n",
+        "print(evens) "
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "iD-D4Lj5SqT_"
+      },
+      "source": [
+        "Let's see if you can generate the first 8 Mersenne numbers using a list comprehension. A Mersenne number is a number that is of the form $M_n = 2^n - 1$.\n",
+        "\n",
+        "**NOTE** 0 is not a Mersenne number (since its binary representation is not all 1s), so be sure to adjust your loop range accordingly."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "ANOwHjBBSqT_"
+      },
+      "outputs": [],
+      "source": [
+        "mersennes = #TODO Add a list comprehension here to generate the first 8 Mersenne numbers.\n",
+        "assert mersennes == [1, 3, 7, 15, 31, 63, 127, 255], f\"Your code produced {mersennes}\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "GpBe365ASqT_"
+      },
+      "source": [
+        "## Numpy"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "SGum295bSqT_"
+      },
+      "source": [
+        "### Vectors & Matrices\n",
+        "\n",
+        "The most fundamental data structure in python is an `ndarray` which is short for n-dimensional array (also called a `tensor`). You can easily make any list/tuple into an `ndarray` using the following two methods: `np.array` & `np.asarray`. The main difference between the two is that `np.array` creates a copy when the input is already an `ndarray` and so is a bit less efficient than `np.asarray`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "EhJKgsFlSqT_"
+      },
+      "outputs": [],
+      "source": [
+        "x = list(range(10))\n",
+        "\n",
+        "y = np.array(x)\n",
+        "z = np.asarray(x)\n",
+        "\n",
+        "print(y)\n",
+        "print(z)\n",
+        "# We can assert that they are truly equal.\n",
+        "assert np.all(y == z)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "FOgEDctNSqT_"
+      },
+      "source": [
+        "Most of the time, you'll want to create a matrix or vector that is all zeros or ones. The methods for these are `np.zeros` & `np.ones`, both of which accept the expected shape."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "7ZDjndxwSqUA"
+      },
+      "outputs": [],
+      "source": [
+        "zero_vector = np.zeros(10)\n",
+        "assert zero_vector.shape == (10,)\n",
+        "\n",
+        "ones_matrix = np.ones((2, 5))\n",
+        "assert ones_matrix.shape == (2, 5)\n",
+        "\n",
+        "zero_points = #TODO Create a zeros matrix of size 3x15\n",
+        "assert zero_points.shape == (3, 15) and np.all(zero_points == 0), f\"Incorrect shape {zero_points.shape} or has non-zero elements\"\n",
+        "\n",
+        "one_stack = #TODO  Create a ones matrix of size 10x6\n",
+        "assert one_stack.shape == (10, 6) and np.all(one_stack == 1), f\"Incorrect shape {one_stack.shape} or has non-one elements\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "X2XRHINHSqUA"
+      },
+      "source": [
+        "You may need some structured vectors or matrices, such as a sequence vector or the identity matrix. Those are simple as well."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "u6PWwMjPSqUA"
+      },
+      "outputs": [],
+      "source": [
+        "seq = np.arange(1, 10)  # Vector from 1-9\n",
+        "\n",
+        "I_3x3 = np.eye(3)  # A 3x3 identity matrix\n",
+        "I_4x4 = #TODO Create a 4x4 identity matrix\n",
+        "assert I_4x4.shape == (4, 4) and np.all(np.diag(I_4x4) == 1) and np.all(I_4x4[~np.eye(4, dtype=bool)] == 0), f\"I_4x4 is not a valid identity matrix.\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xXuj6JnYSqUA"
+      },
+      "source": [
+        "### Indexing\n",
+        "\n",
+        "Indexing in `numpy` is slightly different from indexing in traditional python. In `numpy`, you specify the indices all within the same box brackets. The range semantics (e.g. `[0:10]`) are still the same though."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "Mi4Vwn22SqUA"
+      },
+      "outputs": [],
+      "source": [
+        "I_6x6 = np.eye(6)\n",
+        "\n",
+        "# Get the bottom-right 3x3 submatrix\n",
+        "I_3x3 = I_6x6[3:6, 3:6]\n",
+        "\n",
+        "assert np.all(I_3x3 == np.eye(3))\n",
+        "\n",
+        "X = np.asarray(I_6x6)\n",
+        "X[5, 0] = 12\n",
+        "X[0, 5] = 99\n",
+        "\n",
+        "bottom_left = #TODO Get the bottom left submatrix of X\n",
+        "assert np.all(bottom_left == np.asarray([[0, 0, 0], [0, 0, 0], [12, 0, 0]])), f\"Incorrect submatrix indexing\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "iBmsaf2tSqUA"
+      },
+      "source": [
+        "### Shapes & Broadcasting\n",
+        "\n",
+        "Many times, just knowing the shape of your matrix can help in figuring out what the correct operation should be. This is easily achievable with the `shape` method."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "au0OnHc_SqUB"
+      },
+      "outputs": [],
+      "source": [
+        "x = np.empty((10, 12))\n",
+        "shape = #TODO Call the shape method on x to get the correct value\n",
+        "assert shape == (10, 12), f\"Incorrect shape received, expected (10, 12)\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "qKUIe_ATSqUB"
+      },
+      "source": [
+        "Once you know the current shape, sometimes you may want to add a single (or maybe multiple) dimension. This is particularly common in `numpy` where vectors are represented as shape `(N,)` and are different from shape `(N,1)` (which is a Nx1 matrix), even though they both have the same number of elements.\n",
+        "\n",
+        "Sometimes you want to work with the latter, so you can reshape it easily:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "JdAGUzcLSqUB"
+      },
+      "outputs": [],
+      "source": [
+        "N = 10\n",
+        "x = np.arange(N)\n",
+        "assert x.shape == (N,)\n",
+        "\n",
+        "x1 = x.reshape((N, 1))\n",
+        "assert x1.shape == (N, 1)\n",
+        "\n",
+        "x2 = #TODO reshape x to (1, N)\n",
+        "assert x2.shape == (1, N), f\"x2 has shape {x2.shape}, expected (1, 10)\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MoVJRwG6SqUB"
+      },
+      "source": [
+        "Other times, you just want to add a dimension for a quick operation, such as matrix-matrix multiplication. You can add new dimensions by indexing with `np.newaxis` or, more conveniently, `None`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "QU9YBtT6SqUB"
+      },
+      "outputs": [],
+      "source": [
+        "x = np.arange(10)\n",
+        "x1 = x[:, None]\n",
+        "\n",
+        "assert x1.shape == (10, 1)\n",
+        "\n",
+        "y = np.arange(20)\n",
+        "y11 = #TODO Add two dimensions, one before and one after the main vector dimension\n",
+        "assert y11.shape == (1, 20, 1), f\"Incorrect dimensions {y11.shape}, should be (1, 20, 1)\"\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "jtvnre3WSqUB"
+      },
+      "source": [
+        "### Arithmetic Operations\n",
+        "\n",
+        "In general, prefer performing arithmetic on arrays using __vectorized__ code over `for` loops because numpy vectorized arithmetic is orders of magnitude faster."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "9HYO4QhFSqUB"
+      },
+      "outputs": [],
+      "source": [
+        "# Don't worry about understanding this block of code; it's just to measure the execution speed.\n",
+        "from time import perf_counter\n",
+        "from contextlib import contextmanager\n",
+        "@contextmanager\n",
+        "def measure_time(msg) -> float:\n",
+        "    start = perf_counter()\n",
+        "    yield lambda: perf_counter() - start\n",
+        "    print(f'{msg:10s} took {perf_counter() - start:.6f} seconds')"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "0bASzbi-SqUB"
+      },
+      "outputs": [],
+      "source": [
+        "x = np.arange(1e5)\n",
+        "y = np.arange(2e5, 3e5)\n",
+        "\n",
+        "# Bad\n",
+        "with measure_time('Bad') as _:\n",
+        "    z = []\n",
+        "    for i in range(len(x)):\n",
+        "        z.append(x[i] + y[i])\n",
+        "    z = np.array(z)\n",
+        "\n",
+        "# Still bad\n",
+        "with measure_time('Still Bad') as _:\n",
+        "    z = np.zeros(x.shape)\n",
+        "    for i, (xi, yi) in enumerate(zip(x, y)):\n",
+        "        z[i] = xi + yi\n",
+        "\n",
+        "# Best\n",
+        "with measure_time('Best') as _:\n",
+        "    z = x + y"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "m8U6W9giSqUC"
+      },
+      "source": [
+        "Most matrix/vector arithmetic is element-wise, with one important exception being general matrix multiplication (gemm), which is defined using the `@` operator in `numpy`.  gemm is the workhorse of linear algebra and, by consequence, robotics."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "qzX_zrPCSqUC"
+      },
+      "outputs": [],
+      "source": [
+        "x = np.asarray([10., 20, 30])\n",
+        "y = np.asarray([1., 2, 3])\n",
+        "I_4x4 = np.eye(3)\n",
+        "print(f'{x = }')\n",
+        "print(f'{y = }')\n",
+        "print(f'{x + y = }')\n",
+        "print(f'{x - y = }')\n",
+        "print(f'{x * y = }')\n",
+        "print(f'{x / y = }')\n",
+        "print(f'{I_4x4 @ x = }')\n",
+        "print(f'{np.sum(x) = }')\n",
+        "print(f'{np.prod(x) = }')\n",
+        "\n",
+        "O = np.ones((1, 3))\n",
+        "sum_x = None  # TODO: Without using `sum`, use gemm to calculate the sum of the elements in x.\n",
+        "assert sum_x == np.sum(x), f\"You computed {sum_x = }, but should be {np.sum(x)}\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "UUykaVZASqUC"
+      },
+      "source": [
+        "### Broadcasting\n",
+        "\n",
+        "Broadcasting is one the most powerful aspects of `numpy`, but is also tricky to understand. The best way to understand it is to try to use it as much as possible and gain an intuitive feeling for it.\n",
+        "\n",
+        "This feature allows you to specify matrices/vectors of different sizes (albeit with some conditions) and operate on them together. A common example is element-wise matrix vector product as shown below. Be sure to checkout the [numpy broadcasting basics page](https://numpy.org/doc/stable/user/basics.broadcasting.html) for more details!"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "NKSx3615SqUC"
+      },
+      "outputs": [],
+      "source": [
+        "X = np.array([[0, 0, 0, 0],\n",
+        "       [0, 1, 0, 0],\n",
+        "       [0, 0, 2, 0],\n",
+        "       [0, 0, 0, 3],\n",
+        "       [0, 0, 0, 0],\n",
+        "       [0, 1, 0, 0],\n",
+        "       [0, 0, 2, 0],\n",
+        "       [0, 0, 0, 3],\n",
+        "       [0, 0, 0, 0],\n",
+        "       [0, 1, 0, 0],\n",
+        "       [0, 0, 2, 0],\n",
+        "       [0, 0, 0, 3]])\n",
+        "\n",
+        "assert X.shape == (12, 4)\n",
+        "scale = np.arange(6, 10)  # shape is (4,)\n",
+        "\n",
+        "# Broadcasting scale (4,) to (12, 4) for element-wise multiplication\n",
+        "Y = X * scale\n",
+        "\n",
+        "assert np.all(Y == np.tile(np.diag([0, 7, 16, 27]), 3).T), f\"Scaled values are incorrect\""
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "BjR0ziuOSqUC"
+      },
+      "source": [
+        "### Random Sampling\n",
+        "\n",
+        "To finish up, we will look at examples of sampling from probability distributions commonly employed when you wish to generate random numbers."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ESaf4zTtSqUC"
+      },
+      "source": [
+        "#### Generate a matrix of random values\n",
+        "\n",
+        "Sometimes you just need some random values sampled uniformly from `[0, 1]`. This is easy to do with `np.random.random_sample` which follows the same semantics as `np.ones`."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "lLAjqlxASqUC"
+      },
+      "outputs": [],
+      "source": [
+        "R = np.random.random_sample((3, 3))\n",
+        "print(R)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "_XOI8ioSSqUC"
+      },
+      "source": [
+        "#### Samples from the Normal Distribution\n",
+        "\n",
+        "The Gaussian/Normal distribution is the most common probability distribution used in robotics due to it having some very nice properties, one of which is ease of sampling.\n",
+        "\n",
+        "We can sample from both a standard Gaussian, as well as a custom Gaussian."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "aRs9awH_SqUC"
+      },
+      "outputs": [],
+      "source": [
+        "std_samples = np.random.standard_normal((3, 3))\n",
+        "print(std_samples)\n",
+        "\n",
+        "# The first argument is the mean, the second is the standard deviation\n",
+        "# We specify the standard deviation to be 1.0 which is pretty tight around the mean.\n",
+        "# This means that the samples won't be too far away from the mean value aka 5\n",
+        "custom_gaussian = np.random.normal(5, 1.0, (3, 3))\n",
+        "print(custom_gaussian)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "99TkRdltSqUC"
+      },
+      "source": [
+        "#### Sampling choices\n",
+        "\n",
+        "Finally, one common scenario is having to choose from a set of options, e.g. should you move or not move, should you pick object A, B or C, etc.\n",
+        "This is where the `choice` method is useful since it allows you to sample discrete values easily."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "5-Q1b-KcSqUC"
+      },
+      "outputs": [],
+      "source": [
+        "rng = np.random.default_rng()\n",
+        "\n",
+        "# Give us 6 random choices from 0-9 without replacement\n",
+        "choices = rng.choice(10, size=6, replace=False)\n",
+        "print(\"Choices without replacement:\", choices)\n",
+        "\n",
+        "# Give us 7 random choices from 20-29 with replacement\n",
+        "choices = rng.choice(np.arange(20, 30), size=7, replace=True)\n",
+        "#NOTE you may or may not see duplicates, because it is (pseudo-)random!\n",
+        "print(\"Choices with replacement:\", choices)\n",
+        "\n",
+        "# Sample random actions for the robot\n",
+        "actions = ['move forward', 'move right', 'move left', 'move backward']\n",
+        "samples = rng.choice(actions, size=3, replace=True)\n",
+        "print(samples)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "vzIrDwBNSqUC"
+      },
+      "source": [
+        "### Conclusion\n",
+        "\n",
+        "Hopefully you find this quick tour of `python` and `numpy` informative and useful. A lot of the tips and tricks here should serve you well during the course and beyond it, making you both a very competent Python programmer as well as a roboticist.\n",
+        "\n",
+        "Looking forward to having you in the class!"
+      ]
+    }
+  ],
+  "metadata": {
+    "interpreter": {
+      "hash": "402f513bd64bb05ccdfd11315d0c88453571d1d1d73db48414a1b2a41f771ebc"
+    },
+    "kernelspec": {
+      "display_name": "Python 3.9.6 ('base')",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.9.6"
+    },
+    "orig_nbformat": 4,
+    "vscode": {
+      "interpreter": {
+        "hash": "402f513bd64bb05ccdfd11315d0c88453571d1d1d73db48414a1b2a41f771ebc"
+      }
+    },
+    "colab": {
+      "name": "CS 3630 Summer 2022 Project 0",
+      "provenance": []
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
