@@ -1,6 +1,6 @@
 # Georgia Tech's CS 3630 - Introduction to Perception and Robotics (Summer 2022)
 ## Course Description
-The course is not intended to give in-depth coverage of robotics, but rather to give an overview of the field --- a sort of tasting menu for robotics.
+This course covers fundamental problems and leading solutions to autonomous robot navigation – what and how must a robot perceive the world, and how can it use that information to navigate effectively.
 ## Learning Objectives
 Upon completion of this course, students will be able to:
 - Describe and explain what robots are and what they can do
